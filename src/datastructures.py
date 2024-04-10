@@ -51,11 +51,20 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        pass 
+        for new_member in self._members:
+            if new_member["id"] == member["id"]:
+                return {"msg":"The request body is duplicated"}
+            else:
+                self._members.append(member)
+                return {"msg":"Created succesfully"}
+
 
     def delete_member(self, id):
         # fill this method and update the return
-        pass
+        for member in self._members:
+            if member["id"] == id:
+                self._members.remove(member)
+                return {"done": True}
 
     def get_member(self, id):
         # fill this method and update the return
