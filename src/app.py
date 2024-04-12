@@ -45,11 +45,12 @@ def get_member(id):
 
 @app.route('/member', methods=['POST'])
 def add_member():
-   
-    request_body = request.get_json(force=True)
-    new_members = jackson_family.add_member(request_body)
-    print(new_members)
-    return jsonify(new_members), 200
+    request_body = request.json
+    if not request_body:
+        return jsonify({'msg': 'Bad Request'}), 400
+    members = jackson_family.add_member(request_body)
+    return (members)
+
 
 @app.route('/member/<int:id>', methods=['DELETE'])
 def delete_member(id):
